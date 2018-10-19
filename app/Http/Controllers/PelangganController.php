@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Users;
+use App\User;
 use App\Pelanggan;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -16,7 +16,8 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        return view('klien.index');
+        $pelanggan = Pelanggan::where('id_user', Auth::user()->id)->first();
+        return view('index', compact('pelanggan'));
     }
 
     /**
@@ -37,7 +38,7 @@ class PelangganController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
         $request->validate([
             'nama' => 'required|String|max:255',
             'alamat' => 'required|string|max:255',
@@ -46,8 +47,8 @@ class PelangganController extends Controller
             'password' => 'required|string|min:6|confirmed',
         ]);
 
-        dd('masuk');
-        $user=Users::create([
+        // dd('masuk');
+        $user=User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => 'pembeli',
@@ -60,7 +61,7 @@ class PelangganController extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
-        return redirect()->route('klien.index');
+        return redirect()->route('index');
     }
 
     /**

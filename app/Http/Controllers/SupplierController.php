@@ -13,10 +13,10 @@ class SupplierController extends Controller
     }
 
      public function index(){
-    	return view('admin.supplier.index');
+    	return view('supplier.list');
     }
 
     public function create(){
-    	return view('admin.supplier.add');
+    	return view('supplier.add');
     }
 }

@@ -9,14 +9,14 @@
       </h1>
     </section>
 
-    <div class="col-md-12" style="padding: 50px;">
+    <div class="col-md-12" style="padding: 20px;">
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Add Supplier</h3>
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
+            <form class="form-horizontal" style="position: relative;">
               <div class="box-body">
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Nama Supplier</label>
@@ -84,7 +84,4 @@
             </form>
           </div>
         </div>
-
-
-
 @endsection

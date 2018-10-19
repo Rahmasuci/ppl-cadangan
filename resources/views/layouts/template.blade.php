@@ -79,7 +79,8 @@ desired effect
         <!-- Authentication Links -->
            @guest
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                <a class="nav-link" href
+                {{ route('login') }}">{{ __('Login') }}</a>
               </li>
               <li class="nav-item">
               @if (Route::has('register'))
@@ -119,8 +120,18 @@ desired effect
           <li class="header">MAIN NAVIGATION</li>
           <li><a href="{{url('/home')}}"><i class="fa fa-dashboard"></i> <span>Dahsboard</span></a></li>
           <li><a href="{{url('/product')}}"><i class="fa fa-tag"></i> <span>Product</span></a></li>
-           <li><a href="{{url('/order')}}"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>
-        <li><a href="#"><i class="fa fa-money"></i> <span>Trasanksi</span></a></li>
+          <li><a href="{{url('/order')}}"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>
+        <li class="treeview">
+          <a href="#"><i class="fa fa-money"></i> <span>Transaksi</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ url('/transaksi/up') }}">Upload Transaksi</a></li>
+            <li><a href="{{ url('/transaksi') }}">Daftar Transaksi</a></li>
+          </ul>
+        </li>
         <li class="treeview">
           <a href="#"><i class="fa fa-users"></i> <span>Supplier</span>
             <span class="pull-right-container">
@@ -128,8 +139,8 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{ url('/supplier') }}">Daftar Supplier</a></li>
-            <li><a href="{{ url('/supplier/add') }}">Tambah Akun Supplier</a></li>
+            <li><a href="{{ url('/supplier') }}">List Supplier</a></li>
+            <li><a href="{{ url('/supplier/add') }}">Tambah Supplier</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -139,13 +150,19 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Membuat Penawaran</a></li>
-            <li><a href="#">Daftar Penawaran</a></li>
+            <li><a href="{{ url('/penawaran/make') }}">Membuat Penawaran</a></li>
+            <li><a href="{{ url('/penawaran') }}">Daftar Penawaran</a></li>
           </ul>
         </li>
+        <li><a href="{{ url('/laporan') }}"><i class="fa fa-files-o"></i> <span>Laporan</span></a></li>
+       
+        <li class="header">SETTING</li>
         <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-      </ul>
+        <li><a href="#" ><i class="fa fa-sign-out"></i>
+         <span>Logout</span></a></li>
       </form>
+      </ul>
+      
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->
@@ -167,82 +184,6 @@ desired effect
     <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
   </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                  </span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
-  <!-- /.control-sidebar -->
-  <!-- Add the sidebar's background. This div must be placed
-  immediately after the control sidebar -->
-  <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
 

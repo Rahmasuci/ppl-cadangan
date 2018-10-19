@@ -1,21 +1,21 @@
 @extends('layouts.template')
 
 @section('content')
- <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        Nanti isinya Role
-        <small>Optional description</small>
-      </h1>
+
+	 <section class="content-header">
+      @if(Auth::check())
+        <h1>Hai {{Auth::user()->role}}</h1>
+      @else
+        <h1>Hai</h1>
+      @endif 
     </section>
 
-    <!-- Main content -->
-    <section class="content container-fluid">
+     <section class="content container-fluid">
       <div class="row">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">List Product</h3>
+              <h3 class="box-title">Penawaran</h3>
 
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
@@ -36,17 +36,9 @@
                   <th>Harga/kilo</th>
                   <th>Action</th>
                 </tr>
-                @foreach($product as $p)
-                <tr>
-                  <td>{{ $p->id }}</td>
-                  <td>{{ $p->nama_produk }}</td>
-                  <td>{{ $p->harga_perkilo }}</td>
-                  <td><a href="{{ url ('/order/make/'.$p->id) }}" class="btn btn-info" role = 'button'>Buy</td>
-                </tr>
-                @endforeach
               </table>
             </div>
 
     </section>
-    <!-- /.content -->
+
 @endsection

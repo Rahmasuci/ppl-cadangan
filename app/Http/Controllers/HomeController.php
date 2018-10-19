@@ -26,4 +26,6 @@ class HomeController extends Controller
         $arr['product'] = Product::all();
         return view('index')->with($arr);
     }
+
+    
 }
