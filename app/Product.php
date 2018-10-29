@@ -15,5 +15,9 @@ class Product extends Model
     ];
 
     public $timestamps = false;
+
+    public function order_detail(){
+    	return $this->hasMany('App\OrderDetail', 'id');
+    }
     
 }

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-	protected $table = 'order';
+	protected $table = 'orders';
 
 	protected $fillable = [
 		'alamat_pengiriman', 
@@ -18,11 +18,15 @@ class Order extends Model
 		'status'
 	];
 
+	public $timestamp = true;
+
 	public function pelanggan(){
-		return $this->belongsTo('App\Pelanggan', 'id_pelanggan')
+		return $this->belongsTo('App\Pelanggan', 'id_pelanggan');
 	}
 
-	public function penawaran(){
-		return $this->hasMany('App\Pelanggan', 'id_pelanggan')
+	public function orderdetail(){
+		return $this->hasMany('App\OrderDetail', 'id_order');
 	}
+
+	
 }

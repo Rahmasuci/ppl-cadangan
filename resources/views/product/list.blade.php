@@ -41,12 +41,11 @@
             @foreach($data as $p)
             <tr>
               <td>{{ $p->id }}</td>
-              <td>{{ $p->foto_produk }}</td>
+              <td><img class="img-fluid" src="{{ old('foto_produk') ? old('foto_produk') : $p->foto_produk }}" alt="Card Image Cap" style="max-height: 150px;"</td>
               <td>{{ $p->nama_produk }}</td>
               <td>{{ $p->harga }}</td>
               <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$p->id}}">Edit </button> </td>
-              <td><a href="{{route('product.destroy', $p->id)}}" class="btn btn-danger">Delete</a> </td>
-              <!-- <td><a href="product/" class="btn btn-danger">Delete</a> </td> -->
+              <td><a href="{{route('hapusProduct', $p->id)}}" class="btn btn-danger">Delete</a> </td>
             </tr>
             @endforeach
           </table>
@@ -109,7 +108,7 @@
                       <div class="form-group">
                       <label>Foto Produk</label>
                       <div>
-                        <input type="file" class="form-control" name="foto_produk" id="inputText" required>
+                        <input type="file" class="form-control" name="foto_produk" id="inputText" value="{{$p->foto_produk}}"> 
                       </div>
                     </div>
                       <div class="form-group">

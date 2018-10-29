@@ -18,9 +18,6 @@ class CreatePelangganTable extends Migration
             $table->string('nama');
             $table->string('alamat');
             $table->string('nohp');
-            $table->enum('jenis_kelamin', [
-                'Perempuan', 'Laki-laki'
-            ]);
             $table->integer('id_user')->unsigned();
             $table->foreign('id_user')->on('users')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();

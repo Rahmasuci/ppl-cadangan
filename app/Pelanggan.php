@@ -12,7 +12,7 @@ class Pelanggan extends Model
 		'nama',
 		'alamat',
 		'nohp',
-		'jenis_kelamin',
+		'id_user',
 	];
 
 	public function order(){

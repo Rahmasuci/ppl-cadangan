@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use Auth;
 use App\Pelanggan;
+use App\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -16,9 +17,11 @@ class PelangganController extends Controller
      */
     public function index()
     {
-        $pelanggan = Pelanggan::where('id_user', Auth::user()->id)->first();
+        // return view('layouts.registrasi');
+        // dd(Auth::user());
+        $pelanggan = Pelanggan::where('id_user', Auth::user()->pelanggan()->first()->id)->first();
         return view('index', compact('pelanggan'));
-    }
+   }
 
     /**
      * Show the form for creating a new resource.
@@ -27,7 +30,7 @@ class PelangganController extends Controller
      */
     public function create()
     {
-        //
+        return view('layouts.registrasi');
     }
 
     /**
@@ -55,13 +58,13 @@ class PelangganController extends Controller
         ]);
 
         Pelanggan::create([
+            'id_user'=> $user->id,
             'nama' => $request->nama,
             'alamat' => $request->alamat,
             'nohp' => $request->nohp,
-            'jenis_kelamin' => $request->jenis_kelamin,
         ]);
 
-        return redirect()->route('index');
+        return redirect()->route('home');
     }
 
     /**
@@ -83,7 +86,7 @@ class PelangganController extends Controller
      */
     public function edit(pelanggan $pelanggan)
     {
-        //
+        // 
     }
 
     /**
@@ -108,4 +111,29 @@ class PelangganController extends Controller
     {
         //
     }
+
+    // public function register(Request $r)
+    // {
+    //     $r->validate([
+    //         'nama' => 'required|String|max:255',
+    //         'alamat' => 'required|string|max:255',
+    //         'nohp' => 'required|string|max:255',
+    //         'email' => 'required|string|email|max:255|unique:users',
+    //         'password' => 'required|string|min:6|confirmed',
+    //         'password_confirmation'=>'required'
+    //     ]);
+
+    //     $user = User::create([
+    //         'email'=>$r->email,
+    //         'password'=>bcrypt($r->password),
+    //     ]);
+
+    //     $user->pelanggan()->create([
+    //         'nama' => $request->nama,
+    //         'alamat' => $request->alamat,
+    //         'nohp' => $request->nohp,
+    //     ]);
+
+    //     return view('index');
+    // }
 }

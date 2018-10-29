@@ -16,9 +16,6 @@ class CreateSupplierTable extends Migration
         Schema::create('supplier', function (Blueprint $table) {
             $table->increments('id');
             $table->String('nama_supplier');
-            $table->enum('jenis_kelamin', [
-                'Perempuan', 'Laki-laki'
-            ]);
             $table->String('alamat');
             $table->String('no_hp');
             $table->String('nama_kebun');

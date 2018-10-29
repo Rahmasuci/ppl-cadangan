@@ -33,6 +33,7 @@
               <table class="table table-hover">
                 <tr>
                   <th>ID</th>
+                  <th>Foto Produk</th>
                   <th>Nama Produk</th>
                   <th>Harga/kilo</th>
                   <th>Action</th>
@@ -40,9 +41,10 @@
                 @foreach($product as $p)
                 <tr>
                   <td>{{ $p->id }}</td>
+                  <td><img class="img-fluid" src="{{ old('foto_produk') ? old('foto_produk') : $p->foto_produk }}" alt="Card Image Cap" style="max-height: 150px;" ></td>
                   <td>{{ $p->nama_produk }}</td>
-                  <td>{{ $p->harga_perkilo }}</td>
-                  <!-- <td><a href="{{ url ('/order/make/'.$p->id) }}" class="btn btn-info" role = 'button'>Buy</td> -->
+                  <td>{{ $p->harga}}</td>
+                  <td><a href="{{route ('tambahOrder', $p->id) }}" class="btn btn-info" role = 'button'>Buy</td>
                 </tr>
                 @endforeach
               </table>

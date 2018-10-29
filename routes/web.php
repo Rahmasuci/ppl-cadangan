@@ -11,41 +11,45 @@
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
-// Route::group(['middleware' => ['mimin']], function(){
+Route::group(['middleware' => ['mimin']], function(){
 
-// });
+});
 
+Route::get('/make','PelangganController@create')->name('make_klien');
 Route::post('klien/store', 'PelangganController@store')->name('klien.store');
-Route::get('/dash', 'PelangganController@index')->name('klien.index');
+// Route::get('/dash', 'PelangganController@index')->name('klien.index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('product', 'ProductController');
+Route::get('/delete/{id}', 'ProductController@destroy')->name('hapusProduct');
+
+Route::resource('order', 'OrderController')->except('create', 'show', 'edit', 'update','destroy');
+Route::get('/tambah/{id}' , 'OrderController@tambah')->name('tambahOrder');
+Route::post('/make/{id}', 'OrderController@store')->name('storeOrder');
+Route::get('/verifikasi/{id}', 'OrderController@verifikasi')->name('verifOrder');
 
 Route::get('/profile', 'ProfilController@index')->name('profil');
 Route::put('/profile/edit', 'ProfilController@edit')->name('editProfil');
 
-// Route::get('/product', 'ProductController@index')->name('product');
-// Route::put('/product/edit', 'ProductController@edit')->name('editProduct');
+Route::resource('supplier', 'SupplierController')->except('show', 'edit', 'update','destroy');
 
-Route::get('/order', 'OrderController@index')->name('order');
-Route::get('/order/make/{id}', 'OrderController@create')->name('make_order');
+Route::resource('penawaran', 'PenawaranController')->except('show', 'edit');
+Route::get('/make/{id}' , 'PenawaranController@tambah')->name('makePenawaran');
+Route::post('/store/{id}' , 'PenawaranController@store')->name('storePenawaran');
+Route::get('/hapus/{id}', 'PenawaranController@destroy')->name('hapusPenawaran');
 
-Route::get('/supplier', 'SupplierController@index')->name('order');
-Route::get('/supplier/add', 'SupplierController@create')->name('add_supplier');
+Route::resource('pengajuan', 'PengajuanController')->except('show', 'edit');
+Route::post('/pengajuan/{id}', 'PengajuanController@store')->name('storePengajuan');
 
 Route::get('/transaksi', 'TransaksiController@index')->name('transaksi');
 Route::get('/transaksi/up', 'TransaksiController@create')->name('upload_transaksi');
 
-Route::get('/penawaran', 'PenawaranController@index')->name('penawaran');
-Route::get('/penawaran/make', 'PenawaranController@create')->name('make_transaksi');
-
 Route::get('/laporan', 'LaporanController@index')->name('laporan');
 
 Auth::routes();
-

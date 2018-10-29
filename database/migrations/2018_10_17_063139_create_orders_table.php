@@ -16,13 +16,13 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('id');
             $table->String('alamat_pengiriman');
-            $table->timestamp('tgl_pesan');
             $table->date('batas_pengiriman');
             $table->date('tgl_kirim');
             $table->date('tgl_selesai');
             $table->integer('id_pelanggan')->unsigned();
             $table->foreign('id_pelanggan')->on('pelanggan')->references('id')->onUpdate('cascade');
             $table->enum('status', ['belum bayar', 'dikirim', 'dalam proses', 'batal']);
+            $table->timestamps();
         });
     }
 

@@ -3,15 +3,17 @@
 @section('content')
  <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Admin
-        <small>Optional description</small>
-      </h1>
+      @if(Auth::check())
+        <h1>Hai {{Auth::user()->role}}</h1>
+        @else
+        <h1>Hai</h1>
+      @endif 
     </section>
 
     <!-- Main content -->
     <section class="content container-fluid">
-      <div class="row">
+      <a href="{{route ('supplier.create')}}" class="btn btn-primary">Tambah Supplier</a> 
+      <div class="row" style="margin-top: 20px;">
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -34,11 +36,20 @@
                   <th>ID</th>
                   <th>Nama Supplier</th>
                   <th>Alamat Rumah</th>
+                  <th>No Hp</th>
                   <th>Nama Kebun</th>
                   <th>Alamat Kebun</th>
-                  <th>No Hp</th>
-                  
                 </tr>
+                @foreach($supplier as $s)
+                <tr>
+                  <td>{{ $s->id }}</td>
+                  <td>{{ $s->nama_supplier }}</td>
+                  <td>{{ $s->alamat }}</td>
+                  <td>{{ $s->no_hp }}</td>
+                  <td>{{ $s->nama_kebun }}</td>
+                  <td>{{ $s->alamat_kebun }}</td>
+                </tr>
+                @endforeach
               </table>
             </div>
            

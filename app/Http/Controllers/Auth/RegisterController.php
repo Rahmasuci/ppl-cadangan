@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Pelanggan;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -49,11 +50,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
+            'nama' => 'required|String|max:255',
             'alamat' => 'required|string|max:255',
             'nohp' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            
         ]);
     }
 
@@ -61,16 +63,21 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return 
      */
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'alamat' => $data['alamat'],
-            'nohp' => $data['nohp'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role' => 'admin'
         ]);
+
+        $user = Pelanggan::create([
+            'nama' => $data['nama'],
+            'alamat' => $data['alamat'],
+            'nohp' => $data['nohp'],
+        ]);
+
     }
 }

@@ -1,10 +1,8 @@
-<?php
-
+<?php 
 namespace App\Http\Controllers;
 
 use App\Product;
 use Illuminate\Http\Request;
-
 
 class ProductController extends Controller
 {
@@ -62,6 +60,8 @@ class ProductController extends Controller
         $f_p = str_replace('\\', '/', $f_p);
         $f_p = asset('storage'.$f_p);
 
+        // dd($f_p);
+
         Product::create([
             'foto_produk'   => $f_p,
             'nama_produk'   => $request->nama_produk,
@@ -92,7 +92,7 @@ class ProductController extends Controller
     {
         return view('product.list', [
             'data'          => $product,
-            'tittle'        => 'Tambah Produk',
+            'tittle'        => 'Edit Produk',
             'modul_link'    => route('product.index'),
             'modul'         => 'Produk',
             'action'        => route('product.store'),
@@ -135,11 +135,12 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        dd('masuk');
-        $produk->delete();
+        // dd('masuk');
+        $product = Product::find($id);
+        $product->delete($id);
 
-        return redirect()->route('product.list');
+        return redirect()->route('product.index');
     }
 }

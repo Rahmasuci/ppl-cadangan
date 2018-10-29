@@ -18,20 +18,45 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="{{route ('storePenawaran', $orderdetail->id)}}" method="post">
+                {{ csrf_field() }}
               <div class="box-body">
                 <div class="form-group">
-                  <label for="inputNumber" class="col-sm-2 control-label">Kuantitas</label>
-
+                  <label for="inputText" class="col-sm-2 control-label">Nama Pelanggan</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="inputNumber">
+                    <input readonly="readonly" value="{{$orderdetail->order->pelanggan->nama}}" type="text" class="form-control" id="inputText">
                   </div>
                 </div>
                 <div class="form-group">
-                  <label for="inputNumber" class="col-sm-2 control-label">Harga Total</label>
-
+                  <label for="inputText" class="col-sm-2 control-label">Alamat Pengiriman</label>
                   <div class="col-sm-10">
-                    <input type="number" class="form-control" id="inputNumber">
+                    <input readonly="readonly" value="{{$orderdetail->order->alamat_pengiriman}}" type="text" class="form-control" id="inputText">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputNumber" class="col-sm-2 control-label">Tanggal Butuh</label>
+                  <div class="col-sm-10">
+                    <input readonly="readonly" value="{{$orderdetail->order->batas_pengiriman}}" class="form-control">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputText" class="col-sm-2 control-label">Kuantitas Order</label>
+                  <div class="col-sm-10">
+                    {{-- @foreach ($order->orderdetail) --}}
+                    <input readonly="readonly"  value="{{$orderdetail->kuantitas}}" type="text" class="form-control" id="inputText">
+                    {{-- @endforeach --}}
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputNumber" class="col-sm-2 control-label">Kuantitas Kurang</label>
+                  <div class="col-sm-10">
+                    <input type="number" name='qty_butuh' class="form-control" id="inputNumber">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputNumber" class="col-sm-2 control-label">Harga</label>
+                  <div class="col-sm-10">
+                    <input type="number" name="hrg_max" class="form-control" id="inputNumber">
                   </div>
                 </div>
               </div>
