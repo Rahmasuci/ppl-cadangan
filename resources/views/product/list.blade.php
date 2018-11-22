@@ -32,7 +32,7 @@
         <div class="box-body table-responsive no-padding">
           <table class="table table-hover">
             <tr>
-              <th>ID</th>
+              <th>#</th>
               <th>Foto Produk</th>
               <th>Nama Produk</th>
               <th>Harga/kilo</th>
@@ -40,14 +40,14 @@
             </tr>
             @foreach($data as $p)
             <tr>
-              <td>{{ $p->id }}</td>
+              <td>{{ $loop->iteration }}</td>
               <td><img class="img-fluid" src="{{ old('foto_produk') ? old('foto_produk') : $p->foto_produk }}" alt="Card Image Cap" style="max-height: 150px;"</td>
               <td>{{ $p->nama_produk }}</td>
               <td>{{ $p->harga }}</td>
-              {{-- <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$p->id}}">Edit </button> </td> --}}
+              <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$p->id}}">Edit </button> </td>
               {{-- <td><a href="{{route('hapusProduct', $p->id)}}" class="btn btn-danger">Delete</a> </td> --}}
             </tr>
-            {{-- @endforeach --}}
+            @endforeach
           </table>
         </div>
 
@@ -92,7 +92,7 @@
           </div>
         </div>
 
-        {{-- @foreach($data as $p) --}}
+        @foreach($data as $p)
           <div class="modal fade" id="myModal-{{$p->id}}" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">

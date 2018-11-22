@@ -220,6 +220,17 @@ class OrderController extends Controller
        return redirect()->back()->with('success_msg','Bukti pembayaran sudah di upload');  
     }
 
+    public function proses(Request $request, $id){
+
+        $order = Order::find($id);
+
+        $order->update([
+            'status'=>'dalam proses',
+        ]);
+
+       return redirect()->back()->with('success_msg','Pemesanan dalam proses');  
+    }
+
     public function selesai(Request $request, $id){
 
         $order = Order::find($id);
@@ -232,15 +243,5 @@ class OrderController extends Controller
        return redirect()->back()->with('success_msg','Pemesanan telah selesai');  
     }
 
-     public function proses(Request $request, $id){
-
-        $order = Order::find($id);
-
-        $order->update([
-            'status'=>'dalam proses',
-            // 'tgl_selesai' => 
-        ]);
-
-       return redirect()->back()->with('success_msg','Pemesanan sedang diproses');  
-    }
+    
 }

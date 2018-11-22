@@ -36,8 +36,8 @@ Route::post('/make/{id}', 'OrderController@store')->name('storeOrder');
 Route::get('/verifikasi/{id}', 'OrderController@verifikasi')->name('verifOrder');
 Route::get('/batal/{id}', 'OrderController@batal')->name('batalOrder');
 Route::put('/upload/{id}', 'OrderController@upload')->name('uploadOrder');
-Route::get('/proses/{id}', 'OrderController@proses')->name('prosesOrder');
 Route::get('/selesai/{id}', 'OrderController@selesai')->name('selesaiOrder');
+Route::get('/proces/{id}', 'OrderController@proses')->name('prosesOrder');
 
 Route::get('/profile', 'ProfilController@index')->name('profil');
 Route::put('/profile/edit', 'ProfilController@edit')->name('editProfil');
@@ -64,7 +64,6 @@ Route::get('/transaksi/up', 'TransaksiController@create')->name('upload_transaks
 
 Route::get('/laporan', 'LaporanController@index')->name('laporan');
 Route::get('/bulan', 'LaporanController@bulan')->name('bulan');
-
-Route::post('/ajaxdata', 'LaporanController@ajax');
+Route::post('/ajax', 'LaporanController@getAjax')->name('ajaxData');
 
 Auth::routes();

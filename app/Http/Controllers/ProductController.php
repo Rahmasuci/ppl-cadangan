@@ -16,9 +16,6 @@ class ProductController extends Controller
         $produk = Product::all();
         return view('product.list', [
             'data'      => $produk,
-            'tittle'    => 'List Produk',
-            'active'    => 'product.list',
-            'createLink'=> route('product.create')
         ]);
     }
 
@@ -29,13 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        // return view('product.list', [
-        //     'tittle'        => 'Tambah Produk',
-        //     'modul_link'    => route('product.index'),
-        //     'modul'         => 'Produk',
-        //     'action'        => route('product.store'),
-        //     'active'        => 'product.index'
-        // ]);
+        //
     }
 
     /**
@@ -90,14 +81,7 @@ class ProductController extends Controller
      */
     public function edit()
     {
-        // return view('product.list', [
-        //     'data'          => $product,
-        //     'tittle'        => 'Edit Produk',
-        //     'modul_link'    => route('product.index'),
-        //     'modul'         => 'Produk',
-        //     'action'        => route('product.store'),
-        //     'active'        => 'product.index'
-        // ]);
+        //
     }
 
     /**
@@ -109,7 +93,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($id);
+        // dd($id);
         $product = Product::find($id);
 
         $request->validate([
@@ -117,7 +101,7 @@ class ProductController extends Controller
             'nama_produk' => 'required|String',
             'harga' => 'required|String',
         ]);
-        dd($request);
+        // dd($request);
         $f_p = $request->file('foto_produk')->store('public');
         $f_p = str_replace('public', '', $f_p);
         $f_p = str_replace('\\', '/', $f_p);

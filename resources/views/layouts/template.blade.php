@@ -33,6 +33,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Google Font -->
 <link rel="stylesheet"
 href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
+<script src="{{ asset ('/js/jquery-3.3.1.min.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 </head>
 <!--
@@ -190,20 +192,7 @@ desired effect
 </footer>
 
 </div>
-<!-- ./wrapper -->
 
-<!-- REQUIRED JS SCRIPTS -->
-
-
-{{-- <script src="{{ asset ('bower_components/jquery/dist/jquery.min.js') }}"></script>
-<script src="{{ asset ('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset ('dist/js/adminlte.min.js') }}"></script>
-<script src="{{ asset ('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
-<script src="{{ asset ('bower_components/chart.js/Chart.js') }}"></script> --}} --}}
-
-<!-- jQuery 3 -->
-<!-- ChartJS -->
-{{-- <script src="{{ asset ('js/chart.js/Chart.js') }}"></script> --}}
 <script src="{{ asset ('bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset ('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -220,7 +209,6 @@ desired effect
 <script src="{{ asset ('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="bower_components/chart.js/Chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-
      @stack('script')
 
    </body>
