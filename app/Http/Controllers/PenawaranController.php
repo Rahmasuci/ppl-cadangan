@@ -21,7 +21,7 @@ class PenawaranController extends Controller
         $data = Penawaran::with('orderdetail')->get();
         // }
         // else{
-        //     $data = Penawaran::with('orderdetail', 'supplier')->where('id_supplier', Auth::user()->supplier()->first()->id)->get();
+            // $data = Penawaran::with('orderdetail', 'supplier')->where('id_supplier', Auth::user()->supplier()->first()->id)->get();
         // }
         return view('penawaran.list', [
             'data'      => $data,
@@ -82,7 +82,10 @@ class PenawaranController extends Controller
      */
     public function show($id)
     {
-        //
+       //  $penawaran = Penawaran::find($id);
+
+       // return Penawaran::make('pengajuan.list')->with('penawaran', $penawaran);
+
     }
 
     /**
@@ -105,18 +108,13 @@ class PenawaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $penawaran = Penawaran::find($id);
-        $request->validate([
-            'qty_butuh' => 'required|String',
-            'hrg_max' => 'required|String',
-        ]);
+        // $penawaran = Penawaran::find($id);
 
-         $penawaran->update([
-            'qty_butuh' => $request->qty_butuh,
-            'hrg_max' => $request->hrg_max,
-        ]);
+        // $penawaran->update([
+        //     'status' => 'batal',
+        // ]);
 
-        return redirect()->route('penawaran.index');
+        // return redirect()->route('penawaran.index');
     }
 
     /**
@@ -128,10 +126,10 @@ class PenawaranController extends Controller
     public function destroy($id)
     {
         // dd($id);
-        $penawaran = Penawaran::find($id);
-        $penawaran->delete($id);
+        // $penawaran = Penawaran::find($id);
+        // $penawaran->delete($id);
 
-        return redirect()->route('penawaran.index');
+        // return redirect()->route('penawaran.index');
     }
 
      public function tambah(Request $request, $id)
@@ -148,6 +146,26 @@ class PenawaranController extends Controller
 
     }
 
-   
+    public function batal(Request $request, $id){
+
+        $penawaran = Penawaran::find($id);
+
+        $penawaran->update([
+            'status'=>'batal',
+        ]);
+
+       return redirect()->back()->with('success_msg','Pemesanan berhasil dibatalkan');  
+    }
+
+    public function selesai(Request $request, $id){
+
+        $penawaran = Penawaran::find($id);
+
+        $penawaran->update([
+            'status'=>'selesai',
+        ]);
+
+       return redirect()->back()->with('success_msg','Pemesanan berhasil dibatalkan');  
+    }
 
 }

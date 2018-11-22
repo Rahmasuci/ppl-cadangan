@@ -10,6 +10,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <title>Distribution</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <meta name="csrf-token" content="{{csrf_token()}}">
   <link rel="stylesheet" href="{{ asset ('bower_components/bootstrap/dist/css/bootstrap.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset ('bower_components/font-awesome/css/font-awesome.min.css') }}">
@@ -32,6 +33,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <!-- Google Font -->
 <link rel="stylesheet"
 href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -82,7 +84,7 @@ desired effect
               <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
             </li>
             <li class="nav-item">
-             <a class="nav-link" href="{{route('make_klien')}}">Registrasi</a>
+             <a class="nav-link" href="{{route('make.klien')}}">Registrasi</a>
            </li>
            @else
            <li class="nav-item dropdown">
@@ -126,19 +128,8 @@ desired effect
       <li><a href="{{url('/product')}}"><i class="fa fa-tag"></i> <span>Product</span></a></li>
       <li><a href="{{url('/order')}}"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>
       <li><a href="{{ route('penawaran.index') }}"><i class="fa fa-paper-plane"></i> <span>Penawaran</span></a></li>
-      <li><a href="{{ route('pengajuan.index') }}"><i class="fa fa-paper-plane-o"></i> <span>Pengajuan</span></a></li>
-      <li class="treeview">
-        <a href="#"><i class="fa fa-money"></i> <span>Transaksi</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="{{ url('/transaksi/up') }}">Upload Transaksi</a></li>
-          <li><a href="{{ url('/transaksi') }}">Daftar Transaksi</a></li>
-        </ul>
-      </li>      
-      <li class="treeview">
+{{--       <li><a href="{{ route('pengajuan.index') }}"><i class="fa fa-paper-plane-o"></i> <span>Pengajuan</span></a></li>
+ --}}   <li class="treeview">
         <a href="#"><i class="fa fa-users"></i> <span>Supplier</span>
           <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
@@ -149,44 +140,33 @@ desired effect
           <li><a href="{{ route('supplier.create') }}">Tambah Supplier</a></li>
         </ul>
       </li>
-      <li><a href="{{ url('/laporan') }}"><i class="fa fa-files-o"></i> <span>Laporan</span></a></li>
+      <li class="treeview">
+        <a href="#"><i class="fa fa-files-o"></i> <span>Laporan</span>
+          <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+          </span>
+        </a>
+        <ul class="treeview-menu">
+          <li><a href="{{ url('/laporan') }}">Tahunan</a></li>
+          <li><a href="{{ url('/bulan') }}">Bulanan</a></li>
+        </ul>
+      </li>
+     
 
       @elseif(Auth::user()->role == 'supplier')
       <li><a href="{{ route('penawaran.index') }}"><i class="fa fa-paper-plane"></i> <span>Penawaran</span></a></li>
       <li><a href="{{ route('pengajuan.index') }}"><i class="fa fa-paper-plane-o"></i> <span>Pengajuan</span></a></li>
-        <li class="treeview">
-        <a href="#"><i class="fa fa-money"></i> <span>Transaksi</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="{{ url('/transaksi/up') }}">Upload Transaksi</a></li>
-          <li><a href="{{ url('/transaksi') }}">Daftar Transaksi</a></li>
-        </ul>
-      </li>
       <li class="header">SETTING</li>
       <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
 
-      @else(Auth::user()->role == 'pelanggan')
+      @elseif(Auth::user()->role == 'pembeli')
       <li><a href="{{url('/order')}}"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>
-      <li class="treeview">
-        <li class="treeview">
-        <a href="#"><i class="fa fa-money"></i> <span>Transaksi</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="{{ url('/transaksi/up') }}">Upload Transaksi</a></li>
-          <li><a href="{{ url('/transaksi') }}">Daftar Transaksi</a></li>
-        </ul>
-      </li>
         <li class="header">SETTING</li>
         <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-        @endif
-      </form>
+      @endif
     </ul>
+  </form>
+    
 
     <!-- /.sidebar-menu -->
   </section>
@@ -214,16 +194,33 @@ desired effect
 
 <!-- REQUIRED JS SCRIPTS -->
 
+
+{{-- <script src="{{ asset ('bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset ('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset ('dist/js/adminlte.min.js') }}"></script>
+<script src="{{ asset ('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+<script src="{{ asset ('bower_components/chart.js/Chart.js') }}"></script> --}} --}}
+
 <!-- jQuery 3 -->
+<!-- ChartJS -->
+{{-- <script src="{{ asset ('js/chart.js/Chart.js') }}"></script> --}}
 <script src="{{ asset ('bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{ asset ('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<!-- FastClick -->
+<script src="{{ asset ('bower_components/fastclick/lib/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset ('dist/js/adminlte.min.js') }}"></script>
+<!-- Sparkline -->
+<script src="{{ asset ('bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
+<!-- jvectormap  -->
+<script src="{{ asset ('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js') }}"></script>
+<script src="{{ asset ('plugins/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
+<!-- SlimScroll -->
+<script src="{{ asset ('bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="bower_components/chart.js/Chart.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
      @stack('script')
 
    </body>

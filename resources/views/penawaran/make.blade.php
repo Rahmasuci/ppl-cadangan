@@ -47,22 +47,33 @@
                     {{-- @endforeach --}}
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group {{$errors->has('qty_butuh') ? 'has_error' : ''}}">
                   <label for="inputNumber" class="col-sm-2 control-label">Kuantitas Kurang</label>
                   <div class="col-sm-10">
                     <input type="number" name='qty_butuh' class="form-control" id="inputNumber">
+                    @if ($errors->has('qty_butuh'))
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('qty_butuh') }}</strong>
+                      </span>
+                      @endif
                   </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group {{$errors->has('hrg_max') ? 'has_error' : ''}}">
                   <label for="inputNumber" class="col-sm-2 control-label">Harga</label>
                   <div class="col-sm-10">
                     <input type="number" name="hrg_max" class="form-control" id="inputNumber">
+                    @if ($errors->has('hrg_max'))
+                      <span class="invalid-feedback" role="alert">
+                        <strong>{{ $errors->first('hrg_max') }}</strong>
+                      </span>
+                    @endif
                   </div>
                 </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-default">Cancel</button>
+                <a href="{{route('order.index')}}" class="btn btn-default">Cancel</a>
+                {{-- <button type="submit" class="btn btn-default">Cancel</button> --}}
                 <button type="submit" class="btn btn-info pull-right">Save</button>
               </div>
               <!-- /.box-footer -->

@@ -29,13 +29,13 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('product.list', [
-            'tittle'        => 'Tambah Produk',
-            'modul_link'    => route('product.index'),
-            'modul'         => 'Produk',
-            'action'        => route('product.store'),
-            'active'        => 'product.index'
-        ]);
+        // return view('product.list', [
+        //     'tittle'        => 'Tambah Produk',
+        //     'modul_link'    => route('product.index'),
+        //     'modul'         => 'Produk',
+        //     'action'        => route('product.store'),
+        //     'active'        => 'product.index'
+        // ]);
     }
 
     /**
@@ -88,16 +88,16 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit()
     {
-        return view('product.list', [
-            'data'          => $product,
-            'tittle'        => 'Edit Produk',
-            'modul_link'    => route('product.index'),
-            'modul'         => 'Produk',
-            'action'        => route('product.store'),
-            'active'        => 'product.index'
-        ]);
+        // return view('product.list', [
+        //     'data'          => $product,
+        //     'tittle'        => 'Edit Produk',
+        //     'modul_link'    => route('product.index'),
+        //     'modul'         => 'Produk',
+        //     'action'        => route('product.store'),
+        //     'active'        => 'product.index'
+        // ]);
     }
 
     /**
@@ -107,14 +107,17 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
+        dd($id);
+        $product = Product::find($id);
+
         $request->validate([
             'foto_produk' => 'required',
             'nama_produk' => 'required|String',
             'harga' => 'required|String',
         ]);
-
+        dd($request);
         $f_p = $request->file('foto_produk')->store('public');
         $f_p = str_replace('public', '', $f_p);
         $f_p = str_replace('\\', '/', $f_p);

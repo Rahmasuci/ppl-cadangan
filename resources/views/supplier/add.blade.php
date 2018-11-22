@@ -68,7 +68,7 @@
                 <div class="form-group">
                   <label  class="col-sm-2 control-label">No Hp</label>
                   <div class="col-sm-10">
-                    <input id="no_hp" type="text" class="form-control{{ $errors->has('no_hp') ? ' is-invalid' : '' }}" name="no_hp" value="{{ old('no_hp') }}" required autofocus>
+                    <input id="no_hp" type="number" class="form-control{{ $errors->has('no_hp') ? ' is-invalid' : '' }}" name="no_hp" value="{{ old('no_hp') }}" required autofocus>
                     @if ($errors->has('no_hp'))
                       <span class="invalid-feedback" role="alert">
                         <strong>{{ $errors->first('no_hp') }}</strong>
@@ -119,7 +119,7 @@
               
               <!-- /.box-body -->
               <div class="box-footer">
-                <button type="submit" class="btn btn-default">Cancel</button>
+                <button type="button" class="btn btn-default">Cancel</button>
                 <button type="submit" class="btn btn-info pull-right">Save</button>
               </div>
               <!-- /.box-footer -->

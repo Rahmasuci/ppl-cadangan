@@ -88,7 +88,7 @@
                 <div class="form-group">
                   <label>No Hp</label>
                   <div>
-                    <input type="text" class="form-control" name="nohp" id="inputText" value="{{Auth::user()->pelanggan->nohp}}">
+                    <input type="number" class="form-control" name="nohp" id="inputText" value="{{Auth::user()->pelanggan->nohp}}">
                   </div>
                 </div>
               </div>
@@ -109,10 +109,13 @@
               <!-- <input type="hidden" name="id" value="{{Auth::user()->id}}"> -->
               {{csrf_field()}}
               <div class="box-body">
-                <div class="form-group">
+                <div class="form-group {{$errors->has('nama_supplier') ? 'has_error' : ''}}" >
                   <label>Nama Supplier</label>
                   <div>
                     <input type="text" class="form-control" name="nama_supplier" id="inputText" value="{{Auth::user()->supplier->nama_supplier}}">
+                    @if($errors->has('nama_supplier'))
+                      <span class="help-block">{{ $errors->has('nama_supplier') }}</span>
+                    @endif
                   </div>
                  </div>
                 <div class="form-group">
@@ -124,7 +127,7 @@
                 <div class="form-group">
                   <label>No Hp</label>
                   <div>
-                    <input type="text" class="form-control" name="no_hp" id="inputText" value="{{Auth::user()->supplier->no_hp}}">
+                    <input type="number" class="form-control" name="no_hp" id="inputText" value="{{Auth::user()->supplier->no_hp}}">
                   </div>
                 </div>
                 <div class="form-group">

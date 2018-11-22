@@ -32,7 +32,6 @@
               <table class="table table-hover">
                 <tr>
                   <th>#</th>
-                  {{-- <th>ID</th> --}}
                   <th>Nama Pelanggan</th>
                   <th>Nama Produk</th>
                   <th>Kuantitas</th>
@@ -48,7 +47,6 @@
                  @foreach ($data as $d)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
-                  {{-- <td>{{ $d->id }}</td> --}}
                   <td>{{ $d->pelanggan->nama}}</td>
                    @foreach ($d->orderdetail as $dt)
                   <td>{{ $dt->product->nama_produk}}</td>
@@ -62,19 +60,78 @@
                   <td>{{ $d->tgl_selesai }}</td>
                   <td>{{ $d->status }}</td>
                   @if(Auth::user()->role == 'admin')
-                    @if($d->status == 'belum diverifikasi')
+                    @if($d->status == 'sudah bayar')
+                      <td><button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button></td>
                       <td><a href="{{route ('verifOrder', $d->id)}} " class="btn btn-primary">Verifikasi</a></td>
-                    @else
+                    @elseif($d->status == 'terverifikasi')
+                      {{-- <td><button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button></td> --}}
                       <td><a href="{{route ('makePenawaran', $dt->id)}} " class="btn btn-warning">Buat Penawaran</a></td>
+                      <td><a href="{{-- {{route ('prosesOrder', $d->id)}} --}}" class="btn btn-success">Diproses</a></td>
+                    @elseif($d->status == 'selesai')
+                      <td><button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button></td>
+                    @endif
+                    
+                  @else (Auth::user()->role == 'pembeli')
+                    @if($d->status == 'belum dibayar')
+                      <td><a href="{{route ('batalOrder', $d->id)}} " class="btn btn-danger">Batal</a></td>
+                      <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$d->id}}">Upload </button></td>
+                        <div class="modal fade" id="myModal-{{$d->id}}" role="dialog">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Upload Bukti Pembayaran</h4>
+                              </div>
+                              <div class="modal-body">
+                                <form class="form-horizontal" method="POST" action="{{route('uploadOrder', $d->id)}}" enctype="multipart/form-data">
+                                  {{csrf_field()}}
+                                  @method('put')
+                                  <div class="box-body">
+                                    <div class="form-group">
+                                    <label>Bukti Pembayaran</label>
+                                    <div>
+                                      <input type="file" class="form-control" name="bukti_pembayaran" id="inputText"> 
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="submit" class="btn btn-info">Save</button>
+                                  </div>
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      @elseif ($d->status == 'sudah bayar')
+                       <td>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button>
+                       </td>
+                       <td>
+                         <a href="{{route('selesaiOrder', $d->id)}}" class="btn btn-success">Selesai</a>
+                       </td>
+                      @else 
+                       <td>
+                        <button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button>
+                       </td>
                     @endif
                   @endif
+                    <div class="modal fade" id="myBukti-{{$d->id}}" role="dialog">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Bukti Pembayaran</h4>
+                          </div>
+                          <div class="modal-body">
+                            <img class="img-fluid" src="{{ old('bukti_pembayaran') ? old('bukti_pembayaran') : $d->bukti_pembayaran }}" alt="Card Image Cap" style="max-height: 150px;"</td>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
                 </tr>
                 @endforeach
               </table>
             </div>
-           
           </div>
-          
         </div>
       </div>
 </section>

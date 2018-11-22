@@ -7,7 +7,7 @@ use App\Product;
 use Auth;
 use App\Order;
 use App\OrderDetail;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
@@ -78,7 +78,7 @@ class OrderController extends Controller
         ]);
         $order = Order::create([
             'alamat_pengiriman' => $request->alamat_pengiriman,
-            'status'            => 'belum diverifikasi',
+            'status'            => 'belum dibayar',
             'id_pelanggan'       => Auth::user()->pelanggan->id,
         ]);
 
@@ -124,7 +124,28 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // $order = Order::find($id);
+        
+
+        // $request->validate([
+        //     'kuantitas' => 'required',
+        //     'total' => 'required',
+        //     'alamat_pengiriman' => 'required'
+            
+        // ]);
+
+        // $order->update([
+        //     'alamat_pengiriman' => $request->alamat_pengiriman,
+        // ]);
+
+        // OrderDetail::update([
+        //     'kuantitas' => $request->kuantitas,
+        //     'total'     => $request->total,
+        // ]);
+
+
+        // return redirect()->route('order.index');
+
     }
 
     /**
@@ -160,6 +181,66 @@ class OrderController extends Controller
             'status'=>'terverifikasi',
         ]);
 
-       return redirect()->back()->with('success_msg','Member berhasil diverifikasi');  
+       return redirect()->back()->with('success_msg','Order terverifikasi');  
+    }
+
+    public function batal(Request $request, $id){
+
+        $order = Order::find($id);
+
+        $order->update([
+            'status'=>'batal',
+        ]);
+
+       return redirect()->back()->with('success_msg','Pemesanan berhasil dibatalkan');  
+    }
+
+    public function upload(Request $request, $id){
+
+        $order = Order::find($id);
+
+        // dd($id);
+        // dd($request);
+        $request->validate([
+            'bukti_pembayaran' => 'required',
+        ]);
+
+        $b_p = $request->file('bukti_pembayaran')->store('public');
+        $b_p = str_replace('public', '', $b_p);
+        $b_p = str_replace('\\', '/', $b_p);
+        $b_p = asset('storage'.$b_p);
+
+        $order->update([
+            'bukti_pembayaran'=> $b_p,
+            'status' => 'sudah bayar'
+            // 'batas_pengiriman' => 
+
+        ]);
+
+       return redirect()->back()->with('success_msg','Bukti pembayaran sudah di upload');  
+    }
+
+    public function selesai(Request $request, $id){
+
+        $order = Order::find($id);
+
+        $order->update([
+            'status'=>'selesai',
+            'tgl_selesai' => Carbon::now(),
+        ]);
+
+       return redirect()->back()->with('success_msg','Pemesanan telah selesai');  
+    }
+
+     public function proses(Request $request, $id){
+
+        $order = Order::find($id);
+
+        $order->update([
+            'status'=>'dalam proses',
+            // 'tgl_selesai' => 
+        ]);
+
+       return redirect()->back()->with('success_msg','Pemesanan sedang diproses');  
     }
 }

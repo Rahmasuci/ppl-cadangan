@@ -39,8 +39,8 @@
                     <input readonly="readonly" value="{{$produk->harga}}" type="text" class="form-control" id="hargaProduk">
                   </div>
                 </div>
-                <div class="form-group has-feedback {{$errors->has('kuantitas') ? 'has_error' : ''}}">
-                  <label for="inputNumber" class="col-sm-2 control-label">Kuantitas</label>
+                <div class="form-group {{$errors->has('kuantitas') ? 'has_error' : ''}}">
+                  <label for="inputNumber" class="col-sm-2 control-label">Kuantitas (kg)</label>
                   <div class="col-sm-10">
                     <input name='kuantitas' type="number" class="form-control" onkeyup="hitungTotal()" id="qty" required>
                   </div>
@@ -52,7 +52,7 @@
                   </div>
                 </div>
                 <hr>
-                <div class="form-group has-feedback {{$errors->has('alamat_pengiriman') ? 'has_error' : ''}}">
+                <div class="form-group{{$errors->has('alamat_pengiriman') ? 'has_error' : ''}}">
                   <label for="inputNumber" class="col-sm-2 control-label" >{{__('Alamat Pengiriman')}}:</label>
                   <div class="col-sm-10">
                     <input type="text" name="alamat_pengiriman" value="{{ old('alamat_pengiriman') }}" class="form-control" id="total" placeholder="Alamat Pengiriman" required>

@@ -36,7 +36,7 @@
               <th>Foto Produk</th>
               <th>Nama Produk</th>
               <th>Harga/kilo</th>
-              <th>Action</th>
+              {{-- <th>Action</th> --}}
             </tr>
             @foreach($data as $p)
             <tr>
@@ -44,10 +44,10 @@
               <td><img class="img-fluid" src="{{ old('foto_produk') ? old('foto_produk') : $p->foto_produk }}" alt="Card Image Cap" style="max-height: 150px;"</td>
               <td>{{ $p->nama_produk }}</td>
               <td>{{ $p->harga }}</td>
-              <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$p->id}}">Edit </button> </td>
-              <td><a href="{{route('hapusProduct', $p->id)}}" class="btn btn-danger">Delete</a> </td>
+              {{-- <td><button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$p->id}}">Edit </button> </td> --}}
+              {{-- <td><a href="{{route('hapusProduct', $p->id)}}" class="btn btn-danger">Delete</a> </td> --}}
             </tr>
-            @endforeach
+            {{-- @endforeach --}}
           </table>
         </div>
 
@@ -92,7 +92,7 @@
           </div>
         </div>
 
-        @foreach($data as $p)
+        {{-- @foreach($data as $p) --}}
           <div class="modal fade" id="myModal-{{$p->id}}" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
@@ -101,7 +101,7 @@
                   <h4 class="modal-title">Edit Produk</h4>
                 </div>
                 <div class="modal-body">
-                  <form class="form-horizontal" method="POST" action="{{route('product.update', $p->id)}}" enctype="multipart/form-data">
+                  <form class="form-horizontal" method="POST" action="{{route('ubahProduct', $p->id)}}" enctype="multipart/form-data">
                     {{csrf_field()}}
                     @method('put')
                     <div class="box-body">

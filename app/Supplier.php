@@ -16,4 +16,8 @@ class Supplier extends Model
 		'alamat_kebun',
 		'id_user',
 	];
+
+	 public function pengajuan(){
+        return $this->hasMany('App\pengajuan', 'id_pengajuan');
+    }
 }

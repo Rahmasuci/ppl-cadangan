@@ -18,8 +18,8 @@ class CreatePengajuanTable extends Migration
             $table->integer('qty');
             $table->integer('hrg');
             $table->enum('status', [
-                'belum diverifikasi', 'sudah diverifikasi','dikirim', 'barang diterima', 'belum dibayar', 'sudah dibayar'
-            ]);
+                'belum diterima', 'diterima', 'tidak diterima', 'barang diterima', 'belum dibayar', 'sudah dibayar', 'selesai'
+            ]); 
             $table->integer('id_supplier')->unsigned();
             $table->foreign('id_supplier')->on('supplier')->references('id')->onUpdate('cascade');
             $table->integer('id_penawaran')->unsigned();

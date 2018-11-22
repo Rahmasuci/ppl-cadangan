@@ -13,7 +13,7 @@ class Penawaran extends Model
     	'hrg_max',
     	'status',
     	'id_detail',
-    	'id_supplier'
+    	'id_pengajuan'
     ];
 
     public function orderdetail(){

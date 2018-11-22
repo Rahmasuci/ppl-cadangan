@@ -38,8 +38,8 @@
                   <th>Nama Pelanggan</th>
                   <th>Nama Produk</th>
                   <th> @if(Auth::user()->role == 'admin')
-                  Kuantitas Order
-                  @endif
+                      Kuantitas Order
+                      @endif
                   </th>
                   <th>Kuantitas Butuh</th>
                   <th>Harga Max</th>
@@ -62,51 +62,15 @@
                   <td>{{ $d->status}}</td>
                   <td>
                     @if(Auth::user()->role == 'admin')
-                      <button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$d->id}}">Edit </button> 
-                       <div class="modal fade" id="myModal-{{$d->id}}" role="dialog">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">Edit Penawran</h4>
-                            </div>
-                            <div class="modal-body">
-                              <form class="form-horizontal" method="POST" action="{{route('penawaran.update', $d->id)}}" enctype="multipart/form-data">
-                                {{csrf_field()}}
-                                @method('put')
-                                <div class="box-body">
-                                  <div class="form-group">
-                                  <label>Kuantitas Order</label>
-                                  <div>
-                                    <input type="text" class="form-control" value="{{$d->orderdetail->kuantitas}}" readonly="readonly"> 
-                                  </div>
-                                </div>
-                                  <div class="form-group">
-                                    <label>Kuantitas Butuh</label>
-                                    <div>
-                                      <input type="text" class="form-control" name="qty_butuh" id="inputText" value="{{$d->qty_butuh}}">
-                                    </div>
-                                  </div>
-                                  <div class="form-group">
-                                    <label>Harga Max</label>
-                                    <div>
-                                      <input type="text" class="form-control" name="hrg_max" id="inputText" value="{{ $d->hrg_max }}">
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                  <button type="submit" class="btn btn-info">Save</button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <a href="{{route('hapusPenawaran', $d->id)}}" class="btn btn-danger">Delete</a>
+                      @if($d->status == 'cari supplier')
+                      <a href="{{route('cancelPenawaran', $d->id)}}" class="btn btn-danger">Batal</a>
+                       <a href="{{route('pengajuan.show', $d->id)}}" class="btn btn-primary">Lihat Pengajuan</a>
+                       <a href="{{route('selesaiPenawaran', $d->id)}}" class="btn btn-success">Selesai</a>
+                       @endif
 
-                    @elseif(Auth::user()->role == 'supplier') 
-                      <button class="btn btn-warning" data-toggle="modal" data-target="#ajukanModal-{{$d->id}}">Pengajuan </button>
+                    @elseif(Auth::user()->role == 'supplier')
+                      @if($d->status == 'cari supplier')
+                      <button class="btn btn-warning" data-toggle="modal" data-target="#ajukanModal-{{$d->id}}">Mengajukan </button>
                       <div class="modal fade" id="ajukanModal-{{$d->id}}" role="dialog">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -125,10 +89,15 @@
                                       <input type="text" class="form-control" id="inputText" value="{{$d->qty_butuh}}" readonly="readonly">
                                     </div>
                                   </div>
-                                  <div class="form-group">
+                                  <div class="form-group {{-- {{$errors->has('qty') ? 'has_error' : ''}} --}}">
                                     <label>Kuantitas Yang Diajukan</label>
                                     <div>
                                       <input type="text" class="form-control" name="qty" id="inputText">
+                                     {{--  @if ($errors->has('qty'))
+                                        <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $errors->first('qty') }}</strong>
+                                        </span>
+                                      @endif --}}
                                     </div>
                                   </div>
                                   <div class="form-group">
@@ -137,10 +106,15 @@
                                       <input type="text" class="form-control" id="inputText" value="{{ $d->hrg_max }}" readonly="readonly">
                                     </div>
                                   </div>
-                                  <div class="form-group">
+                                  <div class="form-group {{-- {{$errors->has('hrg') ? 'has_error' : ''}} --}}">
                                     <label>Harga Yang Diajukan</label>
                                     <div>
                                       <input type="text" class="form-control" name="hrg" id="inputText">
+                                      {{-- @if ($errors->has('hrg'))
+                                        <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $errors->first('hrg') }}</strong>
+                                        </span>
+                                      @endif --}}
                                     </div>
                                   </div>
                                 </div>
@@ -152,6 +126,10 @@
                           </div>
                         </div>
                       </div>
+                      @else
+                      @endif
+
+                      {{-- <a href="{{route('pengajuan.show', $d->id)}}" class="btn btn-primary">Lihat Pengajuan</a> --}}
                     @endif
                   </td>
                   @endforeach

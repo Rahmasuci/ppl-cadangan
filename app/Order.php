@@ -15,7 +15,8 @@ class Order extends Model
 		'tgl_kirim', 
 		'tgl_selesai', 
 		'id_pelanggan',
-		'status'
+		'status',
+		'bukti_pembayaran'
 	];
 
 	public $timestamp = true;

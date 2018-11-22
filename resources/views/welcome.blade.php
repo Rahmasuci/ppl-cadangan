@@ -37,7 +37,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            @if (Route::has('login'))\
+            @if (Route::has('login'))
                     @auth
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" href="{{ url('/home') }}">Home</a>
@@ -45,7 +45,7 @@
                         
                     @else
                         <li class="nav-item">
-                            <a class="nav-link js-scroll-trigger" href="{{ route('register') }}">Register</a>
+                            <a class="nav-link js-scroll-trigger" href="{{ route('make.klien') }}">Register</a>
                         </li>
                     @endauth
             @endif

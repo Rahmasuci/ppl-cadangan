@@ -17,14 +17,19 @@ class PengajuanController extends Controller
      */
     public function index()
     {
-
+        
         $data = [];
-        $data = Pengajuan::with('penawaran', 'supplier')->get();
-        dd($data);
-        return view('pengajuan.list', [
+       
+            $data = Pengajuan::with('penawaran', 'supplier')->where('id_supplier', Auth::user()->supplier()->first()->id)->get();
+        //     $data = Pengajuan::with('penawaran', 'supplier')->get();
+        //     // dd($data);
+       
+        
+        // // dd($data, Pengajuan::where($id));
+        return view('pengajuan.supplier', [
             'data'      => $data,
             'tittle'    => 'List Pengajuan',
-            'active'    => 'pengajuan.list',
+            'active'    => 'pengajuan.supplier',
         ]);
     }
 
@@ -59,7 +64,7 @@ class PengajuanController extends Controller
         $pengajuan = Pengajuan::create([
             'qty'           => $request->qty,
             'hrg'           => $request->hrg,
-            'status'        => 'belum diverifikasi',
+            'status'        => 'belum diterima',
             'id_penawaran'  => $penawaran->id,
             'id_supplier'   => Auth::user()->supplier->id,
         ]);
@@ -75,7 +80,26 @@ class PengajuanController extends Controller
      */
     public function show($id)
     {
-        //
+        // $penawaran = Penawaran::find($id);
+        $penawaran = Penawaran::with('orderdetail')->where('id', $id)->get();
+        // $data = [];
+
+        if(Auth::user()->role == 'admin'){
+            $data = Pengajuan::where('id_penawaran', $id)->get();
+            // with('penawaran', 'supplier')->
+        }
+        else{
+
+           $data = Pengajuan::where('id_supplier', Auth::user()->supplier()->first()->id)->get();
+        }
+        // dd($data);
+       
+        return view('pengajuan.list', [
+            'data'      => $data,
+            'penawaran' => $penawaran,
+            'tittle'    => 'List Pengajuan',
+            'active'    => 'pengajuan.list',
+        ]);
     }
 
     /**
@@ -110,5 +134,74 @@ class PengajuanController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function terima(Request $request, $id){
+
+        $pengajuan = Pengajuan::find($id);
+
+        $pengajuan->update([
+            'status'=>'diterima',
+        ]);
+
+       return redirect()->back()->with('success_msg','Pengajuan berhasil di ubah');  
+    }
+
+    public function proses(Request $request, $id){
+
+        $pengajuan = Pengajuan::find($id);
+
+        $pengajuan->update([
+            'status'=>'dalam proses',
+        ]);
+
+       return redirect()->back()->with('success_msg','Pengajuan berhasil di ubah');  
+    }
+
+     public function kirim(Request $request, $id){
+
+        $pengajuan = Pengajuan::find($id);
+
+        $pengajuan->update([
+            'status'=>'di kirim',
+        ]);
+
+       return redirect()->back()->with('success_msg','Pengajuan berhasil di ubah');  
+    }
+
+    public function unggah(Request $request, $id){
+
+        $pengajuan = Pengajuan::find($id);
+
+        // dd($id);
+        // dd($request);
+        $request->validate([
+            'file_pembayaran' => 'required',
+        ]);
+
+        $fp = $request->file('file_pembayaran')->store('public');
+        $fp = str_replace('public', '', $fp);
+        $fp = str_replace('\\', '/', $fp);
+        $fp = asset('storage'.$fp);
+
+        $pengajuan->update([
+            'file_pembayaran'=> $fp,
+            'status' => 'sudah dibayar'
+            // 'batas_pengiriman' => 
+
+        ]);
+
+       return redirect()->back()->with('success_msg','Bukti pembayaran sudah di upload');  
+    }
+
+    public function verif(Request $request, $id){
+
+        $pengajuan = Pengajuan::find($id);
+
+        $pengajuan->update([
+            'status'=>'terverifikasi',
+        ]);
+
+       return redirect()->back()->with('success_msg','Pengajuan terverifikasi');  
     }
 }

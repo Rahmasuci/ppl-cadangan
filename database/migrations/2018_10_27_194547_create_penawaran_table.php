@@ -15,13 +15,11 @@ class CreatePenawaranTable extends Migration
     {
         Schema::create('penawaran', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('kuantitas');
-            $table->date('tgl_butuh');
+            $table->integer('qty_butuh');
+            $table->integer('hrg_max');
             $table->enum('status', [
-                'cari supplier', 'belum diverifikasi', 'sudah diverifikasi','dikirim', 'barang diterima', 'belum dibayar', 'sudah dibayar'
+                'cari supplier', 'selesai', 'sudah diverifikasi','dikirim', 'barang diterima', 'belum dibayar', 'sudah dibayar'
             ]);
-            $table->integer('id_supplier')->unsigned();
-            $table->foreign('id_supplier')->on('supplier')->references('id')->onUpdate('cascade');
             $table->integer('id_detail')->unsigned();
             $table->foreign('id_detail')->on('order_detail')->references('id')->onUpdate('cascade');
             $table->timestamps();

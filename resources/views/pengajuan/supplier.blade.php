@@ -12,7 +12,7 @@
 
 
   <section class="content container-fluid">
-     <div class="row" style="margin-top: 20px;">
+     {{-- <div class="row" style="margin-top: 20px;">
 
         <div class="col-xs-12">
           <div class="box">
@@ -49,7 +49,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     
      <div class="row" style="margin-top: 20px;">
 
@@ -81,56 +81,14 @@
                   <td>{{ $d->hrg }}</td>
                   <td>{{$d->status}}</td>
                   <td>
-                  @if(Auth::user()->role == 'admin')
-                    @if($d->status == 'belum diterima')
-                      <td><a href="{{route('terimaPengajuan', $d->id)}}" class="btn btn-success">Diterima</a></td>
-                    @elseif($d->status == 'diterima')
-                      <td>
-                        <button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$d->id}}">Upload </button>
-                      </td>
-                       <div class="modal fade" id="myModal-{{$d->id}}" role="dialog">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <button type="button" class="close" data-dismiss="modal">&times;</button>
-                              <h4 class="modal-title">Upload Bukti Pembayaran</h4>
-                            </div>
-                            <div class="modal-body">
-                              <form class="form-horizontal" method="POST" action="{{route('unggahPengajuan', $d->id)}}" enctype="multipart/form-data">
-                                {{csrf_field()}}
-                                @method('put')
-                                <div class="box-body">
-                                  <div class="form-group">
-                                  <label>Bukti Pembayaran</label>
-                                  <div>
-                                    <input type="file" class="form-control" name="file_pembayaran" id="inputText"> 
-                                  </div>
-                                </div>
-                              </div>
-                                <div class="modal-footer">
-                                  <button type="submit" class="btn btn-info">Save</button>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    @else
-                      <td>
-                        <button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button>
-                      </td>
-                    @endif
-                  @else
+                  @if(Auth::user()->role == 'supplier')
                     @if($d->status == 'diterima')
                       <td>
-                       {{--  <a href="{{route('prosesPengajuan', $d->id)}}" class="btn btn-success">Diproses</a>
-                      </td>
-                    @elseif ($d->status == 'dalam proses')
-                      <td> --}}
                         <a href="{{route('kirimPengajuan', $d->id)}}" class="btn btn-success">Dikirim</a>
                       </td>
                     @elseif ($d->status == 'sudah dibayar')
                       <button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button>
+                      <a href="{{route('verifPengajuan', $d->id)}}" class="btn btn-primary">Verifikasi</a>
                     @endif
                   @endif
                   <div class="modal fade" id="myBukti-{{$d->id}}" role="dialog">
@@ -146,7 +104,7 @@
                         </div>
                       </div>
                     </div>
-                    </td>
+                  </td>
                 </tr>
                 @endforeach
               </table>
