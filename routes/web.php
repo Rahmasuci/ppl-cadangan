@@ -27,7 +27,7 @@ Route::post('klien/store', 'PelangganController@store')->name('klien.store');
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('product', 'ProductController');
-Route::get('/ubah/{id}', 'ProductController@update')->name('ubahProduct');
+Route::put('/product/ubah/{id}', 'ProductController@update')->name('ubahProduct');
 Route::get('/delete/{id}', 'ProductController@destroy')->name('hapusProduct');
 
 Route::resource('order', 'OrderController')->except('create', 'show', 'edit', 'update','destroy');
@@ -53,7 +53,7 @@ Route::get('/done/{id}', 'PenawaranController@selesai')->name('selesaiPenawaran'
 Route::resource('pengajuan', 'PengajuanController')->except('edit');
 // Route::get('/liat/{id}' , 'PengajuanController@index')->name('liatPengajuan');
 Route::post('/pengajuan/{id}', 'PengajuanController@store')->name('storePengajuan');
-Route::get('/terima/{id}', 'PengajuanController@terima')->name('terimaPengajuan');
+Route::get('/terima/{id}/{idp}', 'PengajuanController@terima')->name('terimaPengajuan');
 Route::get('/proses/{id}', 'PengajuanController@proses')->name('prosesPengajuan');
 Route::get('/kirim/{id}', 'PengajuanController@kirim')->name('kirimPengajuan');
 Route::put('/unggah/{id}', 'PengajuanController@unggah')->name('unggahPengajuan');

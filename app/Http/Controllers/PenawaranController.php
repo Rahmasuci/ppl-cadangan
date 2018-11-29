@@ -23,6 +23,7 @@ class PenawaranController extends Controller
         // else{
             // $data = Penawaran::with('orderdetail', 'supplier')->where('id_supplier', Auth::user()->supplier()->first()->id)->get();
         // }
+        // dd($data);
         return view('penawaran.list', [
             'data'      => $data,
             'tittle'    => 'List Penawaran',

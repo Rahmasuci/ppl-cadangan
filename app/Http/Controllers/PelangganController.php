@@ -64,7 +64,7 @@ class PelangganController extends Controller
             'nohp' => $request->nohp,
         ]);
 
-        return view('auth.login');
+        return view('welcome');
     }
 
     /**

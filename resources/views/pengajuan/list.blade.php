@@ -1,4 +1,4 @@
-  @extends('layouts.template')
+@extends('layouts.template')
 
 @section('content')
 
@@ -10,10 +10,9 @@
       @endif 
     </section>
 
-
-  <section class="content container-fluid">
+    <section class="content container-fluid">
      <div class="row" style="margin-top: 20px;">
-
+        @include('succes_msg');
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -41,7 +40,7 @@
                     {{$p->orderdetail->kuantitas}}  
                     @endif
                   </td>
-                  <td>{{$p->qty_butuh}}</td>
+                  <td id="qty_butuh">{{$p->qty_butuh}}</td>
                   <td>{{$p->hrg_max}}</td>
                 </tr>
                 @endforeach
@@ -72,18 +71,19 @@
                 </tr>                 
 
                 @foreach ($data as $d )
+                 {{--  @foreach($d->penawaran as $dt) --}}
                 <tr>
-                  {{-- {{ dd($data) --}}
+                  {{-- {{ dd($data) }} --}}
                   <td >{{ $loop->iteration }}</td>
                   <td>{{ $d->supplier->nama_supplier}}</td>
                   <td>{{ $d->supplier->alamat_kebun}}</td>
-                  <td>{{ $d->qty }}</td>
+                  <td id="qty">{{ $d->qty }}</td>
                   <td>{{ $d->hrg }}</td>
                   <td>{{$d->status}}</td>
                   <td>
                   @if(Auth::user()->role == 'admin')
                     @if($d->status == 'belum diterima')
-                      <td><a href="{{route('terimaPengajuan', $d->id)}}" class="btn btn-success">Diterima</a></td>
+                      <td><a href="/distribusi/public/terima/{{$d->id}}/{{$d->penawaran->id}}" class="btn btn-success" id="terima" onclick="myFunction()" >Diterima</a></td>
                     @elseif($d->status == 'diterima')
                       <td>
                         <button class="btn btn-info" data-toggle="modal" data-target="#myModal-{{$d->id}}">Upload </button>
@@ -157,3 +157,13 @@
     </section>
 
 @endsection
+
+@push('script')
+  <script>
+    function myFunction() {
+      if (($('#qty')) > ($('#qty_butuh'))) {
+        alert("I am an alert box!");
+      }
+    }
+    </script>
+@endpush

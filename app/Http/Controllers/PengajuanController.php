@@ -20,9 +20,9 @@ class PengajuanController extends Controller
         
         $data = [];
        
-            $data = Pengajuan::with('penawaran', 'supplier')->where('id_supplier', Auth::user()->supplier()->first()->id)->get();
+        $data = Pengajuan::with('penawaran', 'supplier')->where('id_supplier', Auth::user()->supplier()->first()->id)->get();
         //     $data = Pengajuan::with('penawaran', 'supplier')->get();
-        //     // dd($data);
+        // dd($data);
        
         
         // // dd($data, Pengajuan::where($id));
@@ -83,7 +83,7 @@ class PengajuanController extends Controller
         // $penawaran = Penawaran::find($id);
         $penawaran = Penawaran::with('orderdetail')->where('id', $id)->get();
         // $data = [];
-
+        // dd($penawaran);
         if(Auth::user()->role == 'admin'){
             $data = Pengajuan::where('id_penawaran', $id)->get();
             // with('penawaran', 'supplier')->
@@ -136,13 +136,29 @@ class PengajuanController extends Controller
         //
     }
 
-    public function terima(Request $request, $id){
+    public function terima(Request $request, $id, $idp){
 
+        // dd('masuk');
         $pengajuan = Pengajuan::find($id);
+        $penawaran = Penawaran::find($idp);
+        
+        if ( $penawaran->qty_butuh >= $pengajuan->qty ) {
+            
+            $pengajuan = Pengajuan::find($id);
 
-        $pengajuan->update([
-            'status'=>'diterima',
-        ]);
+            $pengajuan->update([
+                'status'=>'diterima',
+            ]);
+
+            $penawaran = Penawaran::find($idp);
+
+            $penawaran->update([
+                'qty_butuh'=> $penawaran->qty_butuh - $pengajuan->qty
+            ]);
+
+        } else {
+            return redirect()->back()->with('success_msg','Kuantitas yang diajukan melebihi Kuantitas yang dibutuhkan');
+        }
 
        return redirect()->back()->with('success_msg','Pengajuan berhasil di ubah');  
     }
