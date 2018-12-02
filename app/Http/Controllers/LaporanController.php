@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use PDF;
 
 class LaporanController extends Controller
 {
@@ -45,4 +46,11 @@ class LaporanController extends Controller
     	// echo "string";
     }
     
+    public function pdf()
+    {
+      $pdf = \App::make('dompdf.wrapper');
+      $pdf->loadHTML($this->
+            getAjax());
+      return $pdf->stream();
+    }
 }

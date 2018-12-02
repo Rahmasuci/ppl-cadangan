@@ -11,7 +11,8 @@
     </section> 
 
     <section class="content container-fluid">
-      <div class="row">
+      <div class="row" style="margin-top: 20px;">
+         @include('succes_msg')
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
@@ -69,6 +70,8 @@
                       <td><a href="{{route ('prosesOrder', $d->id)}}" class="btn btn-success">Diproses</a></td>
                     @elseif($d->status == 'selesai')
                       <td><button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button></td>
+                    @elseif($d->status == 'batal')
+
                     @endif
                     
                   @else (Auth::user()->role == 'pembeli')
@@ -109,6 +112,7 @@
                         <td>
                          <a href="{{route('selesaiOrder', $d->id)}}" class="btn btn-success">Selesai</a>
                        </td>
+                      @elseif($d->status == 'batal')
                       @else 
                        <td>
                         <button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button>

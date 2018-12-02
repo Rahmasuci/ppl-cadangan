@@ -65,5 +65,6 @@ Route::get('/transaksi/up', 'TransaksiController@create')->name('upload_transaks
 Route::get('/laporan', 'LaporanController@index')->name('laporan');
 Route::get('/bulan', 'LaporanController@bulan')->name('bulan');
 Route::post('/ajax', 'LaporanController@getAjax')->name('ajaxData');
+Route::get('/download', 'LaporanController@pdf')->name('download');
 
 Auth::routes();

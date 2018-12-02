@@ -12,47 +12,9 @@
 
 
   <section class="content container-fluid">
-     {{-- <div class="row" style="margin-top: 20px;">
-
-        <div class="col-xs-12">
-          <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Penawaran</h3>
-            </div>
-            
-            <div class="box-body table-responsive no-padding">
-              <table class="table table-hover">
-                <tr>
-                  <th>Nama Pelanggan</th>
-                  <th>Alamat Pengiriman</th>
-                  <th> @if(Auth::user()->role == 'admin')
-                  Kuantitas Order
-                  @endif
-                  </th>
-                  <th>Kuantitas Kurang</th>
-                  <th>Harga Max</th>
-                </tr>                 
-
-                @foreach ($penawaran as $p)
-                <tr>
-                  <td>{{$p->orderdetail->order->pelanggan->nama}}</td>
-                  <td>{{$p->orderdetail->order->alamat_pengiriman}}</td>
-                  <td> @if(Auth::user()->role == 'admin')
-                    {{$p->orderdetail->kuantitas}}  
-                    @endif
-                  </td>
-                  <td>{{$p->qty_butuh}}</td>
-                  <td>{{$p->hrg_max}}</td>
-                </tr>
-                @endforeach
-              </table>
-            </div>
-          </div>
-        </div>
-      </div> --}}
-    
+     
      <div class="row" style="margin-top: 20px;">
-
+        @include('succes_msg')
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">

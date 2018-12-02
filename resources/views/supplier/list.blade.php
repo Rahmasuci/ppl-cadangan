@@ -14,6 +14,7 @@
     <section class="content container-fluid">
       <a href="{{route ('supplier.create')}}" class="btn btn-primary">Tambah Supplier</a> 
       <div class="row" style="margin-top: 20px;">
+          @include('succes_msg')
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">

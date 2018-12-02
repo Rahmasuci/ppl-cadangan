@@ -132,45 +132,35 @@ desired effect
     <ul class="sidebar-menu" data-widget="tree">
       <li class="header">MAIN NAVIGATION</li>
        <li><a href="{{url('/home')}}"><i class="fa fa-dashboard"></i> <span>Dahsboard</span></a></li>
+       
       @if(Auth::user()->role == 'admin')
-      <li><a href="{{url('/product')}}"><i class="fa fa-tag"></i> <span>Product</span></a></li>
-      <li><a href="{{url('/order')}}"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>
-      <li><a href="{{ route('penawaran.index') }}"><i class="fa fa-paper-plane"></i> <span>Penawaran</span></a></li>
-{{--       <li><a href="{{ route('pengajuan.index') }}"><i class="fa fa-paper-plane-o"></i> <span>Pengajuan</span></a></li>
- --}}   <li class="treeview">
-        <a href="#"><i class="fa fa-users"></i> <span>Supplier</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="{{ route('supplier.index') }}">List Supplier</a></li>
-          <li><a href="{{ route('supplier.create') }}">Tambah Supplier</a></li>
-        </ul>
-      </li>
-      <li class="treeview">
-        <a href="#"><i class="fa fa-files-o"></i> <span>Laporan</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a href="{{ url('/laporan') }}">Tahunan</a></li>
-          <li><a href="{{ url('/bulan') }}">Bulanan</a></li>
-        </ul>
-      </li>
+        <li><a href="{{url('/product')}}"><i class="fa fa-tag"></i> <span>Product</span></a></li>
+        <li><a href="{{url('/order')}}"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>
+        <li><a href="{{ route('penawaran.index') }}"><i class="fa fa-paper-plane"></i> <span>Penawaran</span></a></li>
+  {{--       <li><a href="{{ route('pengajuan.index') }}"><i class="fa fa-paper-plane-o"></i> <span>Pengajuan</span></a></li>
+   --}}   <li class="treeview">
+          <a href="#"><i class="fa fa-users"></i> <span>Supplier</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="{{ route('supplier.index') }}">List Supplier</a></li>
+            <li><a href="{{ route('supplier.create') }}">Tambah Supplier</a></li>
+          </ul>
+        </li>
+        <li><a href="{{url('/bulan')}}"><i class="fa fa-files-o"></i> <span>Laporan</span></a></li>
      
-
       @elseif(Auth::user()->role == 'supplier')
-      <li><a href="{{ route('penawaran.index') }}"><i class="fa fa-paper-plane"></i> <span>Penawaran</span></a></li>
-      <li><a href="{{ route('pengajuan.index') }}"><i class="fa fa-paper-plane-o"></i> <span>Pengajuan</span></a></li>
-      <li class="header">SETTING</li>
-      <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
-
-      @elseif(Auth::user()->role == 'pembeli')
-      <li><a href="{{url('/order')}}"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>
+        <li><a href="{{ route('penawaran.index') }}"><i class="fa fa-paper-plane"></i> <span>Penawaran</span></a></li>
+        <li><a href="{{ route('pengajuan.index') }}"><i class="fa fa-paper-plane-o"></i> <span>Pengajuan</span></a></li>
         <li class="header">SETTING</li>
         <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
+
+      @elseif(Auth::user()->role == 'pembeli')
+        <li><a href="{{url('/order')}}"><i class="fa fa-shopping-cart"></i> <span>Order</span></a></li>
+          <li class="header">SETTING</li>
+          <li><a href="{{ url('/profile') }}"><i class="fa fa-user"></i> <span>Profile</span></a></li>
       @endif
     </ul>
   </form>

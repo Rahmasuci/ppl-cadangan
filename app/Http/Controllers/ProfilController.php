@@ -34,36 +34,7 @@ class ProfilController extends Controller
                     'alamat_kebun'  => $req->alamat_kebun,
                 ]);
             }
-         return redirect('/profile');
-        // dd($req);
-    	// if(Auth::user()->role == 'pembeli'){
-     //        $profile = Pelanggan::find($req->id);
-     //        $profile->nama = $req->nama;
-     //        $profile->alamat = $req->alamat;
-     //        $profile->nohp = $req->nohp;
-     //        $profile->save();
-     //    }
-            
-
-     //    else(Auth::user()->role == 'supplier'){
-     //        $profile = Supplier::find($req->id);
-     //         $profile->nama_supplier => $req->nama_supplier;
-     //         $profile->alamat => $req->alamat;
-     //         $profile->no_hp=> $req->->no_hp;
-     //         $profile->nama_kebun => $req->nama_kebun;
-     //         $profile->alamat_kebun => $req->alamat_kebun;
-     //          $profile->save();
-     //    }
-
-     //    //  $request->validate([
-     //    //     'nama_supplier' => 'required|String|max:255',
-     //    //     'alamat' => 'required|string|max:255',
-     //    //     'no_hp' => 'required|string|max:255',
-     //    //     'nama_kebun' => 'required|String|max:255',
-     //    //     'alamat_kebun' => 'required|String|max:255',
-     //    // ]);
-
-                	
-    	
+         return redirect('/profile')->with('success_msg','Profil berhasil diubah');;
+       
     }
 }

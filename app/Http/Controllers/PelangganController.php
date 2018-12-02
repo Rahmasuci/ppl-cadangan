@@ -112,28 +112,4 @@ class PelangganController extends Controller
         //
     }
 
-    // public function register(Request $r)
-    // {
-    //     $r->validate([
-    //         'nama' => 'required|String|max:255',
-    //         'alamat' => 'required|string|max:255',
-    //         'nohp' => 'required|string|max:255',
-    //         'email' => 'required|string|email|max:255|unique:users',
-    //         'password' => 'required|string|min:6|confirmed',
-    //         'password_confirmation'=>'required'
-    //     ]);
-
-    //     $user = User::create([
-    //         'email'=>$r->email,
-    //         'password'=>bcrypt($r->password),
-    //     ]);
-
-    //     $user->pelanggan()->create([
-    //         'nama' => $request->nama,
-    //         'alamat' => $request->alamat,
-    //         'nohp' => $request->nohp,
-    //     ]);
-
-    //     return view('index');
-    // }
 }

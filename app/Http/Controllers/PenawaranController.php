@@ -38,12 +38,7 @@ class PenawaranController extends Controller
      */
     public function create($id)
     {
-        // $order = Order::find($id);
-
-        // return view('penawaran.make', [
-        //     'order' => $order,
-        // ]);
-
+        
     }
 
     /**
@@ -71,7 +66,7 @@ class PenawaranController extends Controller
             'id_detail'  => $orderdetail->id,
         ]);
 
-        return redirect()->route('penawaran.index');
+        return redirect()->route('penawaran.index')->with('success_msg','Penawaran berhasil dibuat');
         
     }
 
@@ -83,10 +78,7 @@ class PenawaranController extends Controller
      */
     public function show($id)
     {
-       //  $penawaran = Penawaran::find($id);
-
-       // return Penawaran::make('pengajuan.list')->with('penawaran', $penawaran);
-
+       
     }
 
     /**
@@ -109,13 +101,7 @@ class PenawaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $penawaran = Penawaran::find($id);
-
-        // $penawaran->update([
-        //     'status' => 'batal',
-        // ]);
-
-        // return redirect()->route('penawaran.index');
+        
     }
 
     /**
@@ -155,7 +141,7 @@ class PenawaranController extends Controller
             'status'=>'batal',
         ]);
 
-       return redirect()->back()->with('success_msg','Pemesanan berhasil dibatalkan');  
+       return redirect()->back()->with('success_msg','Penawaran berhasil dibatalkan');  
     }
 
     public function selesai(Request $request, $id){
@@ -166,7 +152,7 @@ class PenawaranController extends Controller
             'status'=>'selesai',
         ]);
 
-       return redirect()->back()->with('success_msg','Pemesanan berhasil dibatalkan');  
+       return redirect()->back()->with('success_msg','Penawaran telah selesai');  
     }
 
 }

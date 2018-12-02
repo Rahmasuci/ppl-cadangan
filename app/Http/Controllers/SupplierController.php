@@ -75,7 +75,7 @@ class SupplierController extends Controller
             
         ]);
 
-        return redirect()->route('supplier.index');
+        return redirect()->route('supplier.index')->with('success_msg','Supplier berhasil di tambah');;
     }
 
     /**
@@ -110,26 +110,7 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $supplier = Supplier::find($id);
-
-        //  $request->validate([
-        //     'nama_supplier' => 'required|String|max:255',
-        //     'alamat' => 'required|string|max:255',
-        //     'no_hp' => 'required|string|max:255',
-        //     'nama_kebun' => 'required|String|max:255',
-        //     'alamat_kebun' => 'required|String|max:255',
-        // ]);
-
-        //  $supplier->update([
-        //     'nama_supplier' => $nama_supplier,
-        //     'alamat' => $request->alamat,
-        //     'no_hp' => $request->no_hp,
-        //     'nama_kebun' => $request->nama_kebun,
-        //     'alamat_kebun' => $request->alamat_kebun,
-        // ]);
-
-        // return redirect('supplier.index');
-
+      
     }
 
     /**

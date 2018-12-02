@@ -46,15 +46,7 @@ class OrderController extends Controller
      */
     public function create(Request $r)
     {
-       // dd($r->all());
-       //  $produk = Product::find($r->input('id'));
-       //  return view('order.make',[
-       //      'tittle'        => 'Tambah Pesanan',
-       //      'modul_link'    => route('order.index'),
-       //      'modul'         => 'Order',
-       //      'action'        => route('order.store'),
-       //      // 'active'        => 'order.index'
-       //  ]);
+   
     }
 
     /**
@@ -88,9 +80,8 @@ class OrderController extends Controller
             'id_order'  => $order->id,
             'id_produk' => $produk->id,
         ]);
-
-
-        return redirect()->route('order.index');
+  
+        return redirect()->route('order.index')->with('success_msg','Pemesanan berhasil dilakukan');
     }
 
     /**
@@ -124,28 +115,7 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $order = Order::find($id);
         
-
-        // $request->validate([
-        //     'kuantitas' => 'required',
-        //     'total' => 'required',
-        //     'alamat_pengiriman' => 'required'
-            
-        // ]);
-
-        // $order->update([
-        //     'alamat_pengiriman' => $request->alamat_pengiriman,
-        // ]);
-
-        // OrderDetail::update([
-        //     'kuantitas' => $request->kuantitas,
-        //     'total'     => $request->total,
-        // ]);
-
-
-        // return redirect()->route('order.index');
-
     }
 
     /**
@@ -181,7 +151,7 @@ class OrderController extends Controller
             'status'=>'terverifikasi',
         ]);
 
-       return redirect()->back()->with('success_msg','Order terverifikasi');  
+       return redirect()->back()->with('success_msg','Pemesanan sudah diverifikasi');  
     }
 
     public function batal(Request $request, $id){

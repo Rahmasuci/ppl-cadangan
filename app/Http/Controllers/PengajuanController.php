@@ -69,7 +69,7 @@ class PengajuanController extends Controller
             'id_supplier'   => Auth::user()->supplier->id,
         ]);
 
-        return redirect()->route('pengajuan.index');
+        return redirect()->route('pengajuan.index')->with('success_msg','Pengajuan berhasil dibuat');
     }
 
     /**
@@ -207,7 +207,7 @@ class PengajuanController extends Controller
 
         ]);
 
-       return redirect()->back()->with('success_msg','Bukti pembayaran sudah di upload');  
+       return redirect()->back()->with('success_msg','Bukti pembayaran berhasil di upload');  
     }
 
     public function verif(Request $request, $id){
@@ -218,6 +218,6 @@ class PengajuanController extends Controller
             'status'=>'terverifikasi',
         ]);
 
-       return redirect()->back()->with('success_msg','Pengajuan terverifikasi');  
+       return redirect()->back()->with('success_msg','Pengajuan sudah di verifikasi');  
     }
 }

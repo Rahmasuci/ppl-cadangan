@@ -59,7 +59,7 @@ class ProductController extends Controller
             'harga'         => $request->harga
         ]);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success_msg','Produk berhasil ditambahkan');
     }
 
     /**
@@ -113,7 +113,7 @@ class ProductController extends Controller
             'harga' => $request->harga,
         ]);
 
-        return redirect()->route('product.index');
+        return redirect()->route('product.index')->with('success_msg','Produk berhasil di ubah');;
     }
 
     /**
@@ -124,10 +124,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        // dd('masuk');
-        $product = Product::find($id);
-        $product->delete($id);
+        // // dd('masuk');
+        // $product = Product::find($id);
+        // $product->delete($id);
 
-        return redirect()->route('product.index');
+        // return redirect()->route('product.index');
     }
 }

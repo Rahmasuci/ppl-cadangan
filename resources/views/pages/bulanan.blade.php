@@ -27,52 +27,14 @@
           <option value="12">Desember</option>
         </select>
 
-      <select class="form-control" id="pilih-tahun" style="width: 10%;">
-        <option value="2018">2018</option>
-        <option value="2019">2019</option>
-      </select>  
+        <select class="form-control" id="pilih-tahun" style="width: 10%;">
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+        </select>
+
+        <a href="{{ url('/download') }}" class="btn btn-primary"><i class="fa fa-print"></i>Print</a>  
+       
       </div>
-          
-        
-      
-     
-      {{-- <div class="btn-group" style="padding-top: 20px; margin-left: 15px">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Bulan <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" >
-          <li><a id="1">Januari</a></li>
-          <li><a id="2">Februari</a></li>
-          <li><a id="3">Maret</a></li>
-          <li><a id="4">April</a></li>
-          <li><a id="5">Mei</a></li>
-          <li><a id="6">Juni</a></li>
-          <li><a id="7">Juli</a></li>
-          <li><a id="8">Agustus</a></li>
-          <li><a id="9">September</a></li>
-          <li><a id="10">Oktober</a></li>
-          <li><a id="11">November</a></li>
-          <li><a id="12">Desember</a></li>
-        </ul>
-      </div> --}}
-      {{-- <div class="btn-group" style="padding-top: 20px; margin-left: 15px">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Tahun <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" >
-          <li><a id="2018">2018</a></li>
-          <li><a href="#">Februari</a></li>
-          <li><a href="#">Maret</a></li>
-          <li><a href="#">Mei</a></li>
-          <li><a href="#">Juni</a></li>
-          <li><a href="#">Juli</a></li>
-          <li><a href="#">Agustus</a></li>
-          <li><a href="#">September</a></li>
-          <li><a href="#">Oktober</a></li>
-          <li><a href="#">November</a></li>
-          <li><a href="#">Desember</a></li>
-        </ul>
-      </div> --}}
 
       <div class="row" style="padding: 15px;">
         <div class="col-xs-12">
@@ -103,41 +65,9 @@
       </div>
     </section>
 
-    {{-- <script src="{{ asset ('bower_components/chart.js/Chart.js') }}"></script>
-    <script src="bower_components/chart.js/Chart.js"></script>
-    <script src="{{ asset ('js/demo/chart-area-demo.js') }}"></script> --}}
+    
   <script type="text/javascript">
-      // var ctx = document.getElementById('myChart').getContext('2d');
-      // var chart = new Chart(ctx, {
-      //     // The type of chart we want to create
-      //     type: 'line',
-
-      //     // The data for our dataset
-      //     data: {
-
-      //         labels: ["January", "February", "March", "April", "May", "June", "July"],
-      //         datasets: [{
-      //             label: "My First dataset",
-      //             backgroundColor: 'rgba(75, 192, 192, 1)',
-      //             borderColor: 'rgba(75, 192, 192, 1)',
-      //             data: [0, 10, 5, 2, 20, 30, 45],
-      //         }]
-      //     },
-
-      //     // Configuration options go here
-      //     options: {
-      //       animation: {
-      //         duration: 1.5, // general animation time
-      //       },
-       
-      //       hover: {
-      //         animationDuration: 1.5, // duration of animations when hovering an item
-      //       },
-       
-      //         responsiveAnimationDuration: 1, // animation duration after a resize
-      //       }
-      // });
-
+      
       jQuery(document).ready(function() {
         $('#pilih-tahun, #pilih-bulan').change(function(event){
           var bulan = $('#pilih-bulan').val();

@@ -16,6 +16,7 @@
             <div class="box-header">
               <h3 class="box-title">Your Profile</h3>
             </div>
+              @include('succes_msg')
             <!-- /.box-header -->
             <div class="box-body">
               <table class="table table-condensed no-padding">
