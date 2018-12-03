@@ -149,6 +149,7 @@ class OrderController extends Controller
 
         $order->update([
             'status'=>'terverifikasi',
+            'batas_pengiriman' => Carbon::now()->addDays(14),
         ]);
 
        return redirect()->back()->with('success_msg','Pemesanan sudah diverifikasi');  
@@ -173,6 +174,7 @@ class OrderController extends Controller
         // dd($request);
         $request->validate([
             'bukti_pembayaran' => 'required',
+
         ]);
 
         $b_p = $request->file('bukti_pembayaran')->store('public');
@@ -182,7 +184,8 @@ class OrderController extends Controller
 
         $order->update([
             'bukti_pembayaran'=> $b_p,
-            'status' => 'sudah bayar'
+            'status' => 'sudah bayar',
+            
             // 'batas_pengiriman' => 
 
         ]);
@@ -195,7 +198,8 @@ class OrderController extends Controller
         $order = Order::find($id);
 
         $order->update([
-            'status'=>'dalam proses',
+            'status'=>'dikirim',
+            'tgl_kirim' => Carbon::now(),
         ]);
 
        return redirect()->back()->with('success_msg','Pemesanan dalam proses');  

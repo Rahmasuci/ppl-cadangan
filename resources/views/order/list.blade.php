@@ -67,7 +67,7 @@
                     @elseif($d->status == 'terverifikasi')
                       {{-- <td><button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button></td> --}}
                       <td><a href="{{route ('makePenawaran', $dt->id)}} " class="btn btn-warning">Buat Penawaran</a></td>
-                      <td><a href="{{route ('prosesOrder', $d->id)}}" class="btn btn-success">Diproses</a></td>
+                      <td><a href="{{route ('prosesOrder', $d->id)}}" class="btn btn-success">Dikirim</a></td>
                     @elseif($d->status == 'selesai')
                       <td><button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button></td>
                     @elseif($d->status == 'batal')
@@ -108,7 +108,7 @@
                        <td>
                         <button class="btn btn-info" data-toggle="modal" data-target="#myBukti-{{$d->id}}">Lihat Bukti </button>
                        </td>
-                      @elseif ($d->status == 'dalam proses')
+                      @elseif ($d->status == 'dikirim')
                         <td>
                          <a href="{{route('selesaiOrder', $d->id)}}" class="btn btn-success">Selesai</a>
                        </td>

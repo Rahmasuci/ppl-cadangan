@@ -12,7 +12,7 @@
 
     <section class="content container-fluid">
      <div class="row" style="margin-top: 20px;">
-        @include('succes_msg');
+        @include('succes_msg')
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">

@@ -53,4 +53,9 @@ class LaporanController extends Controller
             getAjax());
       return $pdf->stream();
     }
+
+    public function convert()
+    {
+      # code...
+    }
 }

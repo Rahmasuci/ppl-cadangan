@@ -61,7 +61,7 @@
         </div>
         <div class="row">
           <div class="col-xs-8">
-           <a href="login.html" class="text-center">I already have a membership</a>
+           <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
          </div>
          <!-- /.col -->
          <div class="col-xs-4">
