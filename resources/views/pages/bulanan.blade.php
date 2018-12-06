@@ -11,8 +11,9 @@
     </section>
 
     <section>
+      <form action="{{ url('/download') }}">
       <div class="form-inline" style="padding: 15px;">
-        <select class="form-control" id="pilih-bulan" style="width: 10%;">
+        <select name="bulan" class="form-control" id="pilih-bulan" style="width: 10%;">
           <option value="1">Januari</option>
           <option value="2">Februari</option>
           <option value="3">Maret</option>
@@ -27,14 +28,15 @@
           <option value="12">Desember</option>
         </select>
 
-        <select class="form-control" id="pilih-tahun" style="width: 10%;">
+        <select name="tahun" class="form-control" id="pilih-tahun" style="width: 10%;">
           <option value="2018">2018</option>
           <option value="2019">2019</option>
         </select>
 
-        <a href="{{ url('/download') }}" class="btn btn-primary"><i class="fa fa-print"></i>Print</a>  
+        <button type="submit" class="btn btn-primary"><i class="fa fa-print"></i>Print</button>  
        
       </div>
+      </form>
 
       <div class="row" style="padding: 15px;">
         <div class="col-xs-12">

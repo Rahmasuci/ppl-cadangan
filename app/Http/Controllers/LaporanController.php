@@ -42,20 +42,68 @@ class LaporanController extends Controller
                   echo '<td>'.$o->status.'</td>';
             echo '</tr>';
     	}
+
+      // return PDF::loadView('pages.laporan', [
+      //   'data'=>$order
+      // ])->download('laporan.pdf'); 
     	
     	// echo "string";
     }
-    
+
     public function pdf()
     {
-      $pdf = \App::make('dompdf.wrapper');
-      $pdf->loadHTML($this->
-            getAjax());
-      return $pdf->stream();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->convert());
+        return $pdf->stream();
+      // return PDF::loadView('pages.laporan', [
+      //   'data'=>$order
+      // ])->download('laporan.pdf'); 
     }
 
     public function convert()
     {
-      # code...
+      $order = Order::with('orderdetail.product', 'pelanggan')->get();
+      $output = '
+        <h3 align="center">Laporan Bulanan</h3>
+          <table width="100%" style="border-collapse: collapse; border:0px;">
+                  <tr>
+                    <th style="border= 1px solid; padding=12px;" width="15%">Pelanggan</th>
+                    <th style="border= 1px solid; padding=12px;" width="15%">Alamat Pengiriman</th>
+                    <th style="border= 1px solid; padding=12px;" width="15%">Produk</th>
+                    <th style="border= 1px solid; padding=12px;" width="15%">Kuantitas</th>
+                    <th style="border= 1px solid; padding=12px;" width="15%">Harga Total</th>
+                    <th style="border= 1px solid; padding=12px;" width="15%">Tgl Pesan</th>
+                    <th style="border= 1px solid; padding=12px;" width="15%">Tgl Selesai</th>
+                    <th style="border= 1px solid; padding=12px;" width="15%">Status</th>
+                  </tr>
+      ';
+      foreach ($order as $o) 
+      {
+        $output .= '
+          <tr>
+            <td>'.$o->pelanggan->nama.'</td>
+            <td>'.$o->alamat_pengiriman.'</td>
+        ';
+      foreach ($o->orderdetail as $od) 
+      {
+        $output .= '
+          <td>'.$od->product->nama_produk.'</td>
+          <td>'.$od->kuantitas.'</td>
+          <td>'.$od->total.'</td>
+        ';
+      }
+      foreach ($order as $o) 
+      {
+        $output .= '
+            <td>'.$o->created_at.'</td>
+            <td>'.$o->tgl_selesai.'</td>
+            <td>'.$o->status.'</td>
+            </tr>
+        ';
+      }
+         
+      }
+      $output .= '</table>';
+      return $output;
     }
 }
